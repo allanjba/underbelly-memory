@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import shuffle from './utilities/shuffle';
 import Card from './components/Card';
+import Header from './components/Header';
 
 function App() {
   const [cards, setCards] = useState(shuffle); // Cards array from assets
@@ -9,7 +10,7 @@ function App() {
   const [disabled, setDisabled] = useState(false); // Prevents rapid clicking
   const [score, setScore] = useState(0);
 
-  const handleClick = card => {
+  const handleClick = (card) => {
     if (!disabled) {
       firstCard ? setSecondCard(card) : setFirstCard(card);
     }
@@ -31,7 +32,7 @@ function App() {
               return { ...card, matched: true };
             } else {
               return card;
-            };
+            }
           });
         });
         handleTurn();
@@ -45,20 +46,27 @@ function App() {
     return () => {
       clearTimeout(pickTimer);
     };
-  }, [cards, firstCard, secontCard])
+  }, [cards, firstCard, secontCard, score])
 
   useEffect(() => {
     const checkScore = cards.filter((card) => !card.matched);
     if (cards.length && checkScore.length < 1) {
-      console.lot("You win!");
+      console.log("You win!");
       setScore(score + 1);
       handleTurn();
       setCards(shuffle);
     }
   }, [cards, score]);
 
+  const handleNewGame = () => {
+    setScore(0);
+    handleTurn();
+    setCards(shuffle);
+  }
+
   return (
     <div>
+      <Header handleNewGame={handleNewGame} score={score} />
       <div className="grid">
         {cards.map((card) => {
           const { image, id, matched } = card;
