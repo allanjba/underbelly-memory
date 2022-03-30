@@ -14,7 +14,7 @@
   --radius: 0.75rem;
   --shadow: 1px 1px 13px #03030390;
 
-  --card-width: 150px;
+  --card-width: 10vw;
   --card-width-mobile: 20vw;
   --card-enter: enter 600ms ease;
 
@@ -47,6 +47,7 @@ body {
 }
 img {
   max-width: 200px;
+  width: 15vw;
 }
 
 /* ========= Menu ======================== */
@@ -56,7 +57,7 @@ header {
   display: flex;
   padding: 0.5rem;
   align-items: center;
-  background: var(--card);
+  background: var(--card-back);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
   animation: var(--card-enter);
@@ -136,9 +137,28 @@ button {
     transform: scale(1);
   }
 }
+@media screen and (max-width: 1024px) {
+  .grid {
+    gap: 1rem;
+    display: grid;
+    margin: 2rem auto;
+    grid-template-columns: repeat(4, auto);
+  }
+  img {
+    max-width: 20vw;
+    width: 12vh;
+  }
+}
 
 /* ========= Mobile ===================== */
 @media screen and (max-width: 720px) {
+  .grid {
+    gap: 0.5rem;
+    display: grid;
+    margin: 2rem auto;
+    grid-template-columns: repeat(4, auto);
+  }
+
   body {
     align-items: center;
   }

@@ -6,7 +6,7 @@ const Header = ({handleNewGame, score}) => {
     return (
         <header className="header">
             <h4>{score} Points</h4>
-            <h3>Underbelly's Memory Game</h3>
+            <h3>Game on!</h3>
             <button onClick={handleNewGame}>New Game</button>
         </header>
     );

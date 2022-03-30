@@ -69,7 +69,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='container'>
       <Header handleNewGame={handleNewGame} score={score} />
       <div className="grid">
         {cards.map((card) => {
