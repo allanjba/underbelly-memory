@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import shuffle from './utilities/shuffle';
 import Card from './components/Card';
 import Header from './components/Header';
+import useAppBadge from './hooks/useAppBadge';
 
 function App() {
   const [cards, setCards] = useState(shuffle); // Cards array from assets
   const [firstCard, setFirstCard] = useState(null); // First selection
   const [secontCard, setSecondCard] = useState(null); // Second selection
   const [disabled, setDisabled] = useState(false); // Prevents rapid clicking
-  const [score, setScore] = useState(0);
+  const [score, setWins] = useState(0);
+  const [setBadge, clearBadge] = useAppBadge();
 
   const handleClick = (card) => {
     if (!disabled) {
@@ -52,14 +54,16 @@ function App() {
     const checkScore = cards.filter((card) => !card.matched);
     if (cards.length && checkScore.length < 1) {
       console.log("You win!");
-      setScore(score + 1);
+      setWins(score + 1);
       handleTurn();
       setCards(shuffle);
+      setBadge();
     }
-  }, [cards, score]);
+  }, [cards, score, setBadge]);
 
   const handleNewGame = () => {
-    setScore(0);
+    clearBadge();
+    setWins(0);
     handleTurn();
     setCards(shuffle);
   }
